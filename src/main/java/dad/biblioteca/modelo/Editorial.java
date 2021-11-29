@@ -1,24 +1,31 @@
 package dad.biblioteca.modelo;
 
-import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlType;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 @XmlType
 public class Editorial {
-	private String nombre;
 
-	@XmlElement
+	private StringProperty nombre = new SimpleStringProperty();
+
+	public StringProperty nombreProperty() {
+		return this.nombre;
+	}
+
+	@XmlAttribute
 	public String getNombre() {
-		return nombre;
+		return this.nombreProperty().get();
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre(final String nombre) {
+		this.nombreProperty().set(nombre);
 	}
-	
+
 	@Override
 	public String toString() {
-		return nombre;
+		return "Editorial [nombre=" + getNombre() + "]";
 	}
-	
+
 }
